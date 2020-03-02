@@ -1,0 +1,146 @@
+
+To start Hadoop - 
+start-all.sh
+
+To check services - 
+sudo JPS
+
+To stop Hadoop
+stop-all.sh
+----
+
+To Create Directory
+hadoop dfs -mkdir /NewDirectory/Dir1
+
+-------------
+To off the safe mode -
+hdfs dfsadmin -safemode leave
+
+----
+
+To Copy File :
+
+From Local System to HDFS
+bin/hadoop dfs -copyFromLocal /home/administrator/R3.jar /ClientJavaF
+
+From HDFS to Local
+bin/hadoop dfs -copyToLocal /ClientJavaFolder/HadoopAddFile.txt  /home/administrator/Desktop/Hadoop/NewFileCopied.txt
+
+From HDFS to HDFS
+bin/hadoop dfs -cp /ClientJavaFolder/HadoopAddFile.txt /myNewDir/hello
+
+-------
+
+To Move : File will be copied and file from copied path will be deleted.
+
+From Local System to HDFS
+bin/hadoop dfs -moveFromLocal  /home/administrator/Desktop/Hadoop/NewFileCopied.txt  /NewFile/MovedFile.txt
+
+From HDFS to HDFS
+/hadoop dfs -mv /NewFile/MovedFile.txt /a.txt
+
+To list the files available
+bin/hadoop dfs -ls /
+
+----------
+
+To Delete from HDFS
+To Delete File inside Dir
+bin/hadoop dfs -rm /ClientJavaFolder/NewRenameFile.txt
+
+To Delete Directory
+bin/hadoop dfs -rm /ClientJavaFolder
+
+To Delete Directory which start with same name and ends with different character.
+bin/hadoop dfs -rm /ClientJavaFolder/File*
+
+-------------
+
+To Rename the File name : 
+bin/hadoop dfs -mv /ClientJavaFolder/HadoopAddFile.txt  /ClientJavaFolder/RenamedFile.txt
+
+-------------
+
+To set Access permission
+To set permission for File
+bin/hadoop dfs -chmod 771 /ClientJavaFolder/NewRenameFile.txt
+
+To set permission for Directory
+bin/hadoop dfs -chmod 771 /ClientJavaFolder/
+
+------------
+
+how to append file - 
+hdfs fs  -appendtofile filenames
+hadoop fs -appendToFile file1.txt file2.txt /data/append.txt
+
+to check count of files in Dir. :
+ hadoop fs -count Dir_name
+------------
+To Merge files - 
+
+hadoop fs -getmerge /user/data merge.txt
+==========
+
+Hadoop fs command Options
+1. mkdir: 
+2. ls:
+3. put:
+4. get:
+5. cat:
+6. cp:
+7. mv:
+8. rm:
+9. getmerge:
+----------
+10. setrep:
+hadoop fs -setrep 2 /data/emp.txt
+----------
+11. touchz:
+hadoop fs -touchz /data/emp1.txt
+----------
+12. appendToFile:
+----------------
+13. tail:
+hadoop fs -tail /data/emp.txt
+--------------
+14. stat:
+Format accepts file size in blocks (%b), group name of owner(%g), file name (%n),
+block size (%o), replication (%r), user name of owner(%u), modification date
+(%y, %Y)
+
+user@tri03ws-386:~$ hadoop fs -stat /in/appendfile
+2014-11-26 04:57:04
+user@tri03ws-386:~$ hadoop fs -stat %Y /in/appendfile
+1416977824841
+user@tri03ws-386:~$ hadoop fs -stat %b /in/appendfile
+20981
+user@tri03ws-386:~$ hadoop fs -stat %r /in/appendfile
+1
+user@tri03ws-386:~$ hadoop fs -stat %o /in/appendfile
+134217728
+user@tri03ws-386:~$
+--------------
+15. setfattr:
+-------------
+16. df:
+hadoop fs -df -h /data/emp.txt
+---------
+17. du:
+hdfs dfs -du /user/alapati
+-------------
+18. count:
+19. chmod:
+20.script.sh
+
+------------
+------------
+Run hdfs command in Unix script.
+
+--------
+To find list of file in Dir :  hadoop fs -ls /Data | wc –l
+To get coung of record :  hadoop fs -cat /Data/pig_test1.txt | wc –l
+
+
+To search file - 
+hdfs dfs -ls -R  | grep [search_term]
